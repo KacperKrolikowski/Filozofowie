@@ -22,10 +22,15 @@ void eat(int filnum){\
 
         printf("Filozof %d wzial widelec %d i widelec %d", filnum + 1, ((filnum + 4)% 5))+1, filnum + 1);
 
+        printf("Filozof %d je", filnum + 1);
+
+        sem_post(&fork[filnum]);
 
     }
 
 }
+
+
 
 void take_fork(int filnum){
 
@@ -35,7 +40,11 @@ void take_fork(int filnum){
 
     printf("Filozof %d jest glodny", filnum + 1);
 
+    eat(filnum);
+    sem_post(&mutex);
+    sem_wait(&fork[filnum]);
 
+    sleep(1);
 
 }
 

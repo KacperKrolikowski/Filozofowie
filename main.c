@@ -12,7 +12,32 @@ int fil[5] = {0, 1, 2, 3, 4};
 sem_t mutex;
 sem_t fork[5];
 
+void eat(int filnum){\
 
+    if( state[filnum] == GLOD && state[((filnum + 4)% 5)] != JEDZENIE && state[((filnum + 1)% 5)] != JEDZENIE){
+
+        state[filnum] = JEDZENIE;
+
+        sleep(2);
+
+        printf("Filozof %d wzial widelec %d i widelec %d", filnum + 1, ((filnum + 4)% 5))+1, filnum + 1);
+
+
+    }
+
+}
+
+void take_fork(int filnum){
+
+    sem_wait(&mutex);
+
+    state [filnum] = GLOD;
+
+    printf("Filozof %d jest glodny", filnum + 1);
+
+
+
+}
 
 void* filozof(void* num){
 

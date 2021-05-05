@@ -20,9 +20,9 @@ void test(int filnum){\
 
         sleep(2);
 
-        printf("Filozof %d wzial widelec %d i widelec %d", filnum + 1, ((filnum + 4)% 5))+1, filnum + 1);
+        printf("Filozof %d wzial widelec %d i widelec %d\n", filnum + 1, ((filnum + 4)% 5)+1, filnum + 1);
 
-        printf("Filozof %d je", filnum + 1);
+        printf("Filozof %d je\n", filnum + 1);
 
         sem_post(&fork[filnum]);
 
@@ -36,12 +36,12 @@ void put_fork(int filnum){
 
     state[filnum] = MYSLENIE;
 
-    printf("Filozof %d odlozyl widelec %d i widelec %d", filnum + 1, ((filnum + 4)% 5))+1, filnum + 1);
+    printf("Filozof %d odlozyl widelec %d i widelec %d\n", filnum + 1, ((filnum + 4)% 5)+1, filnum + 1);
 
-    printf("Filozof %d mysli", filnum + 1);
+    printf("Filozof %d mysli\n", filnum + 1);
 
-    test(((filnum + 4)% 5)));
-    test(((filnum + 1)% 5))v);
+    test(((filnum + 4)% 5));
+    test(((filnum + 1)% 5));
 
     sem_post(&mutex);
 
@@ -53,7 +53,7 @@ void take_fork(int filnum){
 
     state [filnum] = GLOD;
 
-    printf("Filozof %d jest glodny", filnum + 1);
+    printf("Filozof %d jest glodny\n", filnum + 1);
 
     test(filnum);
     sem_post(&mutex);
@@ -90,14 +90,18 @@ int main()
 
     for(i = 0; i < 5; i++){
 
-        pthread_create(&thread_id[i], NULL, filozoff, &fil);
+        pthread_create(&thread_id[i], NULL, filozof, &fil);
 
-        printf("Filozof %d mysli", i + 1);
+        printf("Filozof %d mysli\n", i + 1);
 
     }
 
-    for(i = 0; i < 5, i++)
+    for(i = 0; i < 5; i++){
+
+        pthread_join(thread_id[i], NULL);
+
+    }
 
 
-    return 0;
+
 }

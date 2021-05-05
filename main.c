@@ -77,6 +77,27 @@ void* filozof(void* num){
 
 int main()
 {
-    printf("Hello world!\n");
+    int i;
+    pthread_t thread_id[5];
+
+    sem_init(&mutex, 0, 1);
+
+    for(i = 0; i < 5; i++){
+
+        sem_init(&fork[i], 0, 0);
+
+    }
+
+    for(i = 0; i < 5; i++){
+
+        pthread_create(&thread_id[i], NULL, filozoff, &fil);
+
+        printf("Filozof %d mysli", i + 1);
+
+    }
+
+    for(i = 0; i < 5, i++)
+
+
     return 0;
 }
